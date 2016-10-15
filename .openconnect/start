@@ -1,0 +1,5 @@
+VPN_PASS=279803
+openconnectHome=~/.openconnect
+PIDFILE=${openconnectHome}/.pid
+alias execOpenVpn='echo $VPN_PASS | sudo openconnect --user=ir85792 --passwd-on-stdin --no-cert-check -b --pid-file=${PIDFILE} --quiet us.cisadd.com >${openconnectHome}/log.stdout 2>${openconnectHome}/log.stderr && echo vpn started'
+alias killOpenVpn='sudo kill -INT $(cat ${PIDFILE})'
