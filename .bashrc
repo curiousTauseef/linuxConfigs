@@ -118,7 +118,7 @@ then
     bind '"\e[B": history-search-forward'
 fi
 # Confgigure my PS1
-PS1='☯  \[\e[0;31m\]\t \W$ \[\e[0;32m\]'
+PS1='☯  \[\e[0;31m\]\t \u@\W$ \[\e[0;32m\]'
 # environment variables
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Projects/darwin/external/opencv/lib
 
@@ -135,14 +135,15 @@ source ~/.openconnect/start
 # esoroush aliases
 alias cd_projects='cd /home/esoroush/Projects'
 alias cd_d='cd /media/partitionD/'
+alias cd_gre='cd /media/partitionD/abroad/GRE'
 alias calculateVideoLength='/home/esoroush/Projects/goodLinuxScripts/calculateVideoDurations.sh'
 alias summarizePS1="PS1='☯  \[\e[0;31m\]\t$ \[\e[0;32m\]'"
 alias qMakeClean='/home/esoroush/Projects/goodLinuxScripts/qMakeClean.sh'
 
 # tmux autostart
-if command -v tmux>/dev/null; then
-	  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
-fi
+#if command -v tmux>/dev/null; then
+#	  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+#fi
 
 currentWorkingDirectory=${PWD##*/}
 
