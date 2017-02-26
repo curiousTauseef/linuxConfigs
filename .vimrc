@@ -1,6 +1,6 @@
 " general options
 set number
-set guioptions=
+"set guioptions=
 set spell spelllang=en_us
 syntax on
 filetype plugin on
@@ -93,3 +93,5 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+set backspace=indent,eol,start
+
