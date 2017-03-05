@@ -1,0 +1,132 @@
+#include "message.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+void msg_init(const char* body ) {
+	extern Message  MSG;
+	MSG.cursor_ = 0;
+	MSG.length_ = (4 + strlen(body)) * BYTE;
+    char* bodyTmp = (char*)malloc(strlen(body)*BYTE + 1);
+	MSG.body_ = (char*)malloc((MSG.length_) * sizeof(char) + 1);
+	Ascii2Binary(body, bodyTmp);
+    memmove(MSG.body_ + 32, bodyTmp, MSG.length_ - 32);
+    free(bodyTmp);
+    MSG.body_[MSG.length_] = '\0';
+    for(int i = 0; i < 32; ++i)
+        MSG.body_[i] = (i / 4) % 2;
+}
+char msg_read_bit() {
+	extern Message MSG;
+	if(MSG.cursor_ < MSG.length_)
+		return MSG.body_[MSG.cursor_++];
+	else
+		return 2;
+}
+void Ascii2Binary(const char* input, char* binary_array)
+{
+	int ascii;           // used to store the ASCII number of a character
+	int cursor = 0;
+	int length = strlen(input);
+
+
+	for(int x = 0; x < length; x++)          //repeat until user's input have all been read
+	// x < length because the last character is "\0"
+	{
+		ascii = input[x];        //store a character in its ASCII number
+
+		/* Refer to http://www.wikihow.com/Convert-from-Decimal-to-Binary for conversion method used
+		 * in this program*/
+
+		char* binary_reverse = (char*) malloc(BYTE * sizeof(char));       //dynamic memory allocation
+		char* binary = (char*)malloc(BYTE * sizeof(char));
+
+		int y = 0;    //counter used for arrays
+
+		while(ascii != 1)    //continue until ascii == 1
+		{
+			if(ascii % 2 == 0)    //if ascii is divisible by 2
+			{
+				binary_reverse[y] = 0;   //then put a zero
+			}
+			else if(ascii % 2 == 1)    //if it isnt divisible by 2
+			{
+				binary_reverse[y] = 1;   //then put a 1
+			}
+			ascii /= 2;    //find the quotient of ascii / 2
+			y++;    //add 1 to y for next loop
+		}
+
+		if(ascii == 1)    //when ascii is 1, we have to add 1 to the beginning
+		{
+			binary_reverse[y] = 1;
+			y++;
+		}
+
+		if(y < 8)  //add zeros to the end of string if not 8 characters (1 byte)
+		{
+			for(; y < 8; y++)  //add until binary_reverse[7] (8th element)
+			{
+				binary_reverse[y] = 0;
+			}
+		}
+
+		for(int z = 0; z < 8; z++)  //our array is reversed. put the numbers in the rigth order (last comes first)
+		{
+			binary[z] = binary_reverse[7 - z];
+		}
+		// \TODO memcpy or memmv do it with more caution
+		for (int cnt = 0; cnt < BYTE; ++cnt) {
+			binary_array[cursor++] = binary[cnt];
+		}
+		free(binary_reverse);     //free the memory created by dynamic mem. allocation
+		free(binary);
+	}
+	binary_array[cursor] = '\0';
+
+}
+void is_msg_ready()
+{
+    const char* messageFileName = "sentMessage.txt";
+    FILE* pFile = fopen(messageFileName, "r");
+    int c;
+    int countSize = 0;
+    int counter = 0;
+    if(pFile) {
+        c = getc(pFile);
+        // \TODO make a smart ebiLogger :)
+        FILE* ebiLogger = fopen("/home/esoroush/tmpfs/ebiLogger.log", "a");
+        if(c != EOF) {
+            char cTemp[4] = {10, 10, 10, '\0'};
+            do {
+                cTemp[counter++] = c;
+            } while((c=getc(pFile)) != '\n');
+            if(cTemp[1] == 10)
+                countSize = cTemp[0] - 48;
+            else if(cTemp[2] == 10)
+                countSize = (cTemp[0] - 48) * 10 + cTemp[1] - 48;
+            else
+                countSize = (cTemp[0] - 48) * 100 + (cTemp[1] - 48) * 10 + cTemp[0] - 48;
+            if(countSize > 127) {
+                LOG(ebiLogger, "\nCan not send messages longer than 127 charachter\n");
+                 if(truncate(messageFileName, 0) != 0)
+                    LOG(ebiLogger, sprintf("\nCould not truncate file: %s\n", messageFileName));
+               return;
+            }
+            char* message = (char*)malloc((2 + countSize) * sizeof(char) );
+            message[0] = (unsigned char) countSize;
+            int i = 1;
+            while( (c = getc(pFile)) != EOF ) {
+                message[i++] = (char)c;
+            }
+            message[i] = '\0';
+            msg_init(message);
+            LOG(ebiLogger, sprintf("sentMessage: %s, ", message + 1));
+        }
+        fclose(pFile);
+        if(truncate(messageFileName, 0) != 0)
+            LOG(ebiLogger, sprintf("\nCould not truncate file: %s\n", messageFileName));
+        if(ebiLogger)
+            fclose(ebiLogger);
+    }
+}
+

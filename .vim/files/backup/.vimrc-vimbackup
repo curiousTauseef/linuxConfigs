@@ -154,7 +154,7 @@ autocmd ColorScheme lucius highlight StatusLine ctermbg=darkgray cterm=NONE guib
 nnoremap <leader>gdif :GitGutterLineHighlightsToggle<cr>
 " status light
 set laststatus=2
-let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'fancy
 let g:lightline = {
       \ 'colorscheme': 'landscape',
       \ 'mode_map': { 'c': 'NORMAL' },

@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -139,6 +139,7 @@ alias cd_gre='cd /media/partitionD/abroad/GRE'
 alias calculateVideoLength='/home/esoroush/Projects/goodLinuxScripts/calculateVideoDurations.sh'
 alias summarizePS1="PS1='☯  \[\e[0;31m\]\t$ \[\e[0;32m\]'"
 alias qMakeClean='/home/esoroush/Projects/goodLinuxScripts/qMakeClean.sh'
+alias rebuild='make clean; make'
 
 # tmux autostart
 #if command -v tmux>/dev/null; then
