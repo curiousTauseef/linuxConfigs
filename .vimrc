@@ -215,3 +215,10 @@ endfunction
 function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+let g:DoxygenToolkit_briefTag_pre="@Description  "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+let g:DoxygenToolkit_authorName="Ebrahim Soroush <e.soroush@hotmail.com>"
+let g:DoxygenToolkit_licenseTag="Apache License"

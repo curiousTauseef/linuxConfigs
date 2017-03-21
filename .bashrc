@@ -148,3 +148,7 @@ alias rebuild='make clean; make'
 
 currentWorkingDirectory=${PWD##*/}
 
+
+# clipboard manager
+source /home/esoroush/configs/cbm.sh
+

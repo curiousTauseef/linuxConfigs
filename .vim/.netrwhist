@@ -1,5 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/esoroush/tmpfs/FaraTraffic-Rahdari/.git/branches'
-let g:netrw_dirhist_2='/home/esoroush/libraries/vlc-source/modules'
-let g:netrw_dirhist_3='/home/esoroush/.vim'
+let g:netrw_dirhist_cnt =0
