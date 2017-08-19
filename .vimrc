@@ -101,14 +101,9 @@ nnoremap <leader>ut :UndotreeToggle<cr>
 
 " some backup and undo config considerations
 set backup
-set backupdir   =$HOME/.vim/files/backup/
-set backupext   =-vimbackup
-set backupskip  =
-set directory   =$HOME/.vim/files/swap/
 set updatecount =100
 set undofile
-set undodir     =$HOME/.vim/files/undo/
-set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+
 " incsearch plugin
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 map /  <Plug>(incsearch-forward)
@@ -215,10 +210,4 @@ endfunction
 function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-let g:DoxygenToolkit_briefTag_pre="@Description  "
-let g:DoxygenToolkit_paramTag_pre="@Param "
-let g:DoxygenToolkit_returnTag="@Returns   "
-let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
-let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
-let g:DoxygenToolkit_authorName="Ebrahim Soroush <e.soroush@hotmail.com>"
-let g:DoxygenToolkit_licenseTag="Apache License"
+
