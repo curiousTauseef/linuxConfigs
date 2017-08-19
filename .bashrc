@@ -119,23 +119,14 @@ then
 fi
 # Confgigure my PS1
 PS1='☯  \[\e[0;31m\]\t \u@\W$ \[\e[0;32m\]'
-# environment variables
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Projects/darwin/external/opencv/lib
 
-#nvm
-export NVM_DIR="/home/esoroush/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # vim path
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/esoroush/.vimpkg/bin
 
-# openconnect
-source ~/.openconnect/start
 
 # esoroush aliases
 alias cd_projects='cd /home/esoroush/Projects'
-alias cd_d='cd /media/partitionD/'
-alias cd_gre='cd /media/partitionD/abroad/GRE'
 alias calculateVideoLength='/home/esoroush/Projects/goodLinuxScripts/calculateVideoDurations.sh'
 alias summarizePS1="PS1='☯  \[\e[0;31m\]\t$ \[\e[0;32m\]'"
 alias qMakeClean='/home/esoroush/Projects/goodLinuxScripts/qMakeClean.sh'
