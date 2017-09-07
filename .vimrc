@@ -65,17 +65,7 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 
 
-" haskell settings
 
-"au Bufenter *.hs compiler ghc
-
-" configure browser for haskell_doc.vim
-"let g:haddock_browser = "/usr/bin/firefox"
-"  let g:ghc = "/usr/bin/ghc"
-"  let g:haddock_docdir = "/usr/share/doc/ghc-doc/html"
-"let g:haddock_browser = "C:/Program Files/Opera/Opera.exe"
-"let g:haddock_browser = "C:/Program Files/Mozilla Firefox/firefox.exe"
-"let g:haddock_browser = "C:/Program Files/Internet Explorer/IEXPLORE.exe"
 
 " automatically add bird tracks for literate programming
 :set formatoptions+=ro
@@ -103,6 +93,12 @@ nnoremap <leader>ut :UndotreeToggle<cr>
 set backup
 set updatecount =100
 set undofile
+
+" set backup directories
+set undodir=~/.vim/.undo//
+set backupdir=~/.vim/.backup//
+set directory=~/.vim/.swap//
+
 
 " incsearch plugin
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
