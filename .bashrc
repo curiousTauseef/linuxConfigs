@@ -121,16 +121,6 @@ fi
 PS1='☯  \[\e[0;31m\]\t \u@\W$ \[\e[0;32m\]'
 
 
-# vim path
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/esoroush/.vimpkg/bin
-
-
-# esoroush aliases
-alias cd_projects='cd /home/esoroush/Projects'
-alias calculateVideoLength='/home/esoroush/Projects/goodLinuxScripts/calculateVideoDurations.sh'
-alias summarizePS1="PS1='☯  \[\e[0;31m\]\t$ \[\e[0;32m\]'"
-alias qMakeClean='/home/esoroush/Projects/goodLinuxScripts/qMakeClean.sh'
-alias rebuild='make clean; make'
 
 # tmux autostart
 #if command -v tmux>/dev/null; then
@@ -142,4 +132,16 @@ currentWorkingDirectory=${PWD##*/}
 
 # clipboard manager
 source /home/esoroush/configs/cbm.sh
+
+# make vim undo and swap dirs
+if [ ! -d ~/.vim/.undo ] ; then
+    mkdir -p ~/.vim/.undo
+fi
+if [ ! -d ~/.vim/.swap ] ; then
+    mkdir -p ~/.vim/.swap
+fi
+if [ ! -d ~/.vim/.backup ] ; then
+    mkdir -p ~/.vim/.backup
+fi
+
 
